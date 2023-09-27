@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do-List</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div id="cntnr">
+        <div>
+            <h1><span><img src="notebook.png" alt="notebook"></span>To-Do-List</h1><br>
+            <input type="text" placeholder="Add Task Here" id="box">
+            <button id="click">Add</button>
+            <ul id="listelmnt"></ul>
+        </div>
+    </div>
+  
+    <!-----------------------------------------------------javascript------------------------------------------------------------->
+    <script>
+        let adbtn = document.getElementById("click");
+        let inptbx = document.getElementById("box");
+        let ul = document.getElementById("listelmnt");
+        let imge;
+        let list;
+
+        adbtn.onclick = TaskAdder;
+
+        function TaskAdder() {
+            if (inptbx.value === "") {
+                return; // Exit the function if input is empty
+            } else {
+                list = document.createElement("li");
+                list.innerText = inptbx.value;
+                imge = document.createElement("img");
+                imge.src = "delete.png";
+                imge.setAttribute("class", "trashimg"); // Set the class attribute
+                list.appendChild(imge);
+                ul.appendChild(list);
+                inptbx.value = "";
+
+                // Add click event to the delete image
+                imge.addEventListener("click", removeListItem);
+            }
+        }
+
+        function removeListItem() {
+            const listItem = this.parentNode; // Get the parent <li> element
+            listItem.remove(); // Remove the parent <li> element when the image is clicked
+        }
+        
+    </script>
+</body>
+</html>
+
